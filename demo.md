@@ -21,25 +21,22 @@ deployments, and Docker for building images. The Kubernetes community has been
 wonderful - it is a very diverse community that is innovating very fast, and we
 are happy to consider ourselves part of it.
 
-Enough talk, now time for demos! 
-
-(Note: I'll make GIFs for all of the demos, and decide if we're going to do it
-live or use GIFs only based on discussion with other folks presenting. I'm
-leaning towards just using GIFs!)
+Enough talk, now time for demos! I've made animated GIFs of all my demos, because conference WiFi :)
 
 Demo #1 - Zero to JupyterHub in 2 minutes!
 
-(pre-create k8s cluster with ingress + kube-lego + helm + jupyterhub repo added)
-(create config.yaml & do helm install)
+0. Create a Kubernetes Cluster! We'll create a 3 node cluster with wth 14G of RAM each. This
+   part is specific to your cloud provider - we'll use Google Cloud, but there are options for all
+   popular cloud providers.
+
+   gcloud container clusters create jupytercon-demo --num-nodes=3 --machine-type=n1-standard-2
+
 1. create config.yaml that describes the installation we wanna have
    ```
    hub:
      cookieSecret: blah blah 
    proxy:
      secretToken: blah blabh
-   ingress:
-     enabled: true
-     host: jupytercon.hubs.yuvi.in
    ```
 2. Install the jupyterhub chart
    ```
@@ -48,7 +45,11 @@ Demo #1 - Zero to JupyterHub in 2 minutes!
    helm install jupyterhub/jupyterhub --name=jupytercon --namespace=jupytercon \
                  --version=v0.4.1 -f config.yaml
    ```
-3. tada! Note that you get automatic TLS here!
+3. Tada! In a few minutes you'll get an IP you can use to connect to your hub!
+
+   ```
+   watch kubectl --namespace=jupytercon get svc
+   ```
 
 Demo #2 - Upgrade
 
@@ -60,11 +61,18 @@ Demo #2 - Upgrade
    ```
 2. Upgrade!
    ```
-   helm upgrade jupytercon jupyterhub/jupyterhub --version=v0.4.1 -f config.yaml
+   helm upgrade jupytercon jupyterhub/jupyterhub --version=v0.4 -f config.yaml
    ```
 3. w00t! Let's try again - set singleuser image to a jupyter docker stacks
    image.
-4. Upgrade, w00t!
+   ```
+   singleuser:
+      image:
+         name: jupyter/r-notebook
+         tag: 8f56e3c
+   ```
+4. Upgrade, w00t! Now we have our hub running a container image with R & Python!
+   You can easily customize this by building your own images.
 
 (Note: Pre-pull images earlier to make deployments faster)
 
