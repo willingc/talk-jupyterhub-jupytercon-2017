@@ -19,12 +19,12 @@
   - Proxy abstraction
   - JupyterLab supported
   - Related project: [nbgrader](https://github.com/jupyter/nbgrader): Using services and enhancements (beneficial for education and corporate training/workshops) - sharing and collaboration
-- [8 min] [21:00 - 28:59] JupyterHub and Kubernetes (**Yuvi**)
+- [5 min] [21:00 - 25:59] Looking toward future release (0.9) (**Min**)
+  - [HubShare](https://github.com/jupyterhub/hubshare)
+- [8 min] [25:00 - 33:59] JupyterHub and Kubernetes (**Yuvi**)
   - Berkeley: Data8 architecture overview
   - Demo
   - Close - Hook the audience - try it yourself (Zero to JupyterHub with Kubernetes)
-- [5 min] [29:00 - 33:59] Looking toward future release (0.9) (**Min**)
-  - [HubShare](https://github.com/jupyterhub/hubshare)
 - [2 min][34:00 - 35:59] Conclusion (**Carol**, Min, Yuvi)
   - Recap of JupyterHub 0.8 and future direction
   - Community - Next steps - Deploy (Zero to JupyterHub), share knowledge (mailing lists), contribute (authenticators, spawners, services, etc.)
